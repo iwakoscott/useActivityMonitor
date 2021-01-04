@@ -1,19 +1,18 @@
-import { useDebugValue, useEffect, useRef } from "react";
+import { useEffect } from "react";
 
 export const useActivityMonitor = (
   callback,
   { when, wait = 5000, events = ["click"] } = {}
 ) => {
-  const timerRef = useRef();
   useEffect(() => {
+    let timeout;
     function resetTimer() {
-      clearTimeout(timerRef.current);
-      timerRef.current = setTimeout(callback, wait);
+      clearTimeout(timeout);
+      timeout = setTimeout(callback, wait);
     }
 
     function clearTimer() {
-      clearTimeout(timerRef.current);
-      timerRef.current = null;
+      clearTimeout(timeout);
     }
 
     if (!when) return;
