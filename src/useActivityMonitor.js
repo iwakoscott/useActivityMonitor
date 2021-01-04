@@ -5,7 +5,6 @@ export const useActivityMonitor = (
   { when, wait = 5000, events = ["click"] } = {}
 ) => {
   const timerRef = useRef();
-  useDebugValue(`Active: ${when}`);
   useEffect(() => {
     function resetTimer() {
       clearTimeout(timerRef.current);
